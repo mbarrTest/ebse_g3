@@ -1,0 +1,41 @@
+let
+    // Load the CSV file
+    Source = Csv.Document(File.Contents("D:\Masters\DSEBSE\satd-different-sources-data\satd-dataset-pull_requests.csv"), [Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+
+    // Promote the first row as headers
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Filtered Rows" = Table.SelectRows(#"Promoted Headers", each ([classification] <> "non_debt")),
+    
+    // Get distinct values from the pull_type column
+    UniquePullTypes = List.Distinct(#"Filtered Rows"[pull_type]),
+    
+    // Add one-hot encoded columns for each unique value in pull_type
+    OneHotEncodedPullType = List.Accumulate(
+        UniquePullTypes,
+        #"Filtered Rows",
+        (Table, PullType) => Table.AddColumn(
+            Table,
+            "pull_type_" & PullType,
+            each if [pull_type] = PullType then 1 else 0,
+            Int64.Type
+        )
+    ),
+    
+    // Get distinct values from the classification column
+    UniqueClassifications = List.Distinct(OneHotEncodedPullType[classification]),
+    
+    // Add one-hot encoded columns for each unique value in classification
+    OneHotEncodedClassification = List.Accumulate(
+        UniqueClassifications,
+        OneHotEncodedPullType,
+        (Table, Classification) => Table.AddColumn(
+            Table,
+            "classification_" & Classification,
+            each if [classification] = Classification then 1 else 0,
+            Int64.Type
+        )
+    ),
+    #"Reordered Columns" = Table.ReorderColumns(OneHotEncodedClassification,{"project", "pull_number", "id", "text", "indicator", "pull_type", "pull_type_review", "pull_type_comment", "pull_type_summary", "pull_type_description", "classification_code_debt", "classification", "classification_build_debt", "classification_design_debt", "classification_requirement_debt", "classification_test_debt", "classification_documentation_debt", "classification_architecture_debt", "classification_defect_debt"}),
+    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns",{"text", "indicator"})
+in
+    #"Removed Columns"

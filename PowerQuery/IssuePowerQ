@@ -1,0 +1,45 @@
+let
+    Source = Csv.Document(File.Contents("D:\Masters\DSEBSE\satd-different-sources-data\satd-dataset-issues.csv"),
+                          [Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+
+    #"Filtered Rows" = Table.SelectRows(#"Promoted Headers", each [issue_type] <> null and [issue_type] <> ""),
+
+    #"Trimmed Text" = Table.TransformColumns(#"Filtered Rows", {{"issue_type", Text.Trim, type text}, 
+                                                                {"classification", Text.Trim, type text}}),
+
+    #"Replaced Text" = Table.TransformColumns(#"Trimmed Text", 
+        {{"issue_type", each if Text.StartsWith(_, "comment_") then "comment" else _, type text}}),
+    #"Filtered Rows1" = Table.SelectRows(#"Replaced Text", each ([classification] <> "non_debt")),
+
+    // Get a distinct list of unique issue types
+    UniqueIssueTypes = List.Distinct(#"Filtered Rows1"[issue_type]),
+
+    // One-hot encode issue_type column
+    #"One-Hot Encoded Issue Type" = List.Accumulate(
+        UniqueIssueTypes, 
+        #"Filtered Rows1", 
+        (currentTable, currentIssueType) =>
+            Table.AddColumn(currentTable, 
+                            "issue_" & currentIssueType, 
+                            each if [issue_type] = currentIssueType then 1 else 0, 
+                            Int64.Type)
+    ),
+
+    // Get a distinct list of unique classification values
+    UniqueClassifications = List.Distinct(#"One-Hot Encoded Issue Type"[classification]),
+
+    // One-hot encode classification column
+    #"One-Hot Encoded Classification" = List.Accumulate(
+        UniqueClassifications, 
+        #"One-Hot Encoded Issue Type", 
+        (currentTable, currentClassification) =>
+            Table.AddColumn(currentTable, 
+                            "class_" & currentClassification, 
+                            each if [classification] = currentClassification then 1 else 0, 
+                            Int64.Type)
+    ),
+    #"Reordered Columns" = Table.ReorderColumns(#"One-Hot Encoded Classification",{"project", "issue_number", "text", "indicator", "issue_type", "issue_comment", "issue_description", "issue_summary", "classification", "class_design_debt", "class_documentation_debt", "class_code_debt", "class_architecture_debt", "class_test_debt", "class_requirement_debt", "class_build_debt", "class_defect_debt"})
+in
+    #"Reordered Columns"

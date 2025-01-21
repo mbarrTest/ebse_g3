@@ -1,0 +1,203 @@
+EVALUATE
+UNION(
+    ROW(
+        "Classification Column", "classification_architecture_debt",
+        "Pull Type Column", "pull_type_summary",
+        "Correlation",
+        VAR XMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[classification_architecture_debt])
+        VAR YMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[pull_type_summary])
+        VAR Numerator =
+            SUMX(
+                ALL('PullRequestEncoded'),
+                ('PullRequestEncoded'[classification_architecture_debt] - XMean) *
+                ('PullRequestEncoded'[pull_type_summary] - YMean)
+            )
+        VAR Denominator =
+            SQRT(
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[classification_architecture_debt] - XMean, 2)
+                ) *
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[pull_type_summary] - YMean, 2)
+                )
+            )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+    ROW(
+        "Classification Column", "classification_build_debt",
+        "Pull Type Column", "pull_type_summary",
+        "Correlation",
+        VAR XMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[classification_build_debt])
+        VAR YMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[pull_type_summary])
+        VAR Numerator =
+            SUMX(
+                ALL('PullRequestEncoded'),
+                ('PullRequestEncoded'[classification_build_debt] - XMean) *
+                ('PullRequestEncoded'[pull_type_summary] - YMean)
+            )
+        VAR Denominator =
+            SQRT(
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[classification_build_debt] - XMean, 2)
+                ) *
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[pull_type_summary] - YMean, 2)
+                )
+            )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+    ROW(
+        "Classification Column", "classification_code_debt",
+        "Pull Type Column", "pull_type_summary",
+        "Correlation",
+        VAR XMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[classification_code_debt])
+        VAR YMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[pull_type_summary])
+        VAR Numerator =
+            SUMX(
+                ALL('PullRequestEncoded'),
+                ('PullRequestEncoded'[classification_code_debt] - XMean) *
+                ('PullRequestEncoded'[pull_type_summary] - YMean)
+            )
+        VAR Denominator =
+            SQRT(
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[classification_code_debt] - XMean, 2)
+                ) *
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[pull_type_summary] - YMean, 2)
+                )
+            )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+    ROW(
+        "Classification Column", "classification_defect_debt",
+        "Pull Type Column", "pull_type_summary",
+        "Correlation",
+        VAR XMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[classification_defect_debt])
+        VAR YMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[pull_type_summary])
+        VAR Numerator =
+            SUMX(
+                ALL('PullRequestEncoded'),
+                ('PullRequestEncoded'[classification_defect_debt] - XMean) *
+                ('PullRequestEncoded'[pull_type_summary] - YMean)
+            )
+        VAR Denominator =
+            SQRT(
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[classification_defect_debt] - XMean, 2)
+                ) *
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[pull_type_summary] - YMean, 2)
+                )
+            )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+    ROW(
+        "Classification Column", "classification_design_debt",
+        "Pull Type Column", "pull_type_summary",
+        "Correlation",
+        VAR XMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[classification_design_debt])
+        VAR YMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[pull_type_summary])
+        VAR Numerator =
+            SUMX(
+                ALL('PullRequestEncoded'),
+                ('PullRequestEncoded'[classification_design_debt] - XMean) *
+                ('PullRequestEncoded'[pull_type_summary] - YMean)
+            )
+        VAR Denominator =
+            SQRT(
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[classification_design_debt] - XMean, 2)
+                ) *
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[pull_type_summary] - YMean, 2)
+                )
+            )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+    ROW(
+        "Classification Column", "classification_documentation_debt",
+        "Pull Type Column", "pull_type_summary",
+        "Correlation",
+        VAR XMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[classification_documentation_debt])
+        VAR YMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[pull_type_summary])
+        VAR Numerator =
+            SUMX(
+                ALL('PullRequestEncoded'),
+                ('PullRequestEncoded'[classification_documentation_debt] - XMean) *
+                ('PullRequestEncoded'[pull_type_summary] - YMean)
+            )
+        VAR Denominator =
+            SQRT(
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[classification_documentation_debt] - XMean, 2)
+                ) *
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[pull_type_summary] - YMean, 2)
+                )
+            )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+    ROW(
+        "Classification Column", "classification_requirement_debt",
+        "Pull Type Column", "pull_type_summary",
+        "Correlation",
+        VAR XMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[classification_requirement_debt])
+        VAR YMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[pull_type_summary])
+        VAR Numerator =
+            SUMX(
+                ALL('PullRequestEncoded'),
+                ('PullRequestEncoded'[classification_requirement_debt] - XMean) *
+                ('PullRequestEncoded'[pull_type_summary] - YMean)
+            )
+        VAR Denominator =
+            SQRT(
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[classification_requirement_debt] - XMean, 2)
+                ) *
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[pull_type_summary] - YMean, 2)
+                )
+            )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+    ROW(
+        "Classification Column", "classification_test_debt",
+        "Pull Type Column", "pull_type_summary",
+        "Correlation",
+        VAR XMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[classification_test_debt])
+        VAR YMean = AVERAGEX(ALL('PullRequestEncoded'), 'PullRequestEncoded'[pull_type_summary])
+        VAR Numerator =
+            SUMX(
+                ALL('PullRequestEncoded'),
+                ('PullRequestEncoded'[classification_test_debt] - XMean) *
+                ('PullRequestEncoded'[pull_type_summary] - YMean)
+            )
+        VAR Denominator =
+            SQRT(
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[classification_test_debt] - XMean, 2)
+                ) *
+                SUMX(
+                    ALL('PullRequestEncoded'),
+                    POWER('PullRequestEncoded'[pull_type_summary] - YMean, 2)
+                )
+            )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    )
+)

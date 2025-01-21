@@ -1,0 +1,114 @@
+EVALUATE
+UNION(
+    ROW("Issue Column", "issue_comment", "Class Column", "class_architecture_debt", "Correlation",
+        VAR XMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[issue_comment])
+        VAR YMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[class_architecture_debt])
+        VAR Numerator = SUMX(ALL('IssuesEncoded'),
+            ('IssuesEncoded'[issue_comment] - XMean) *
+            ('IssuesEncoded'[class_architecture_debt] - YMean)
+        )
+        VAR Denominator = SQRT(
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[issue_comment] - XMean, 2)) *
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[class_architecture_debt] - YMean, 2))
+        )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+
+    ROW("Issue Column", "issue_comment", "Class Column", "class_build_debt", "Correlation",
+        VAR XMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[issue_comment])
+        VAR YMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[class_build_debt])
+        VAR Numerator = SUMX(ALL('IssuesEncoded'),
+            ('IssuesEncoded'[issue_comment] - XMean) *
+            ('IssuesEncoded'[class_build_debt] - YMean)
+        )
+        VAR Denominator = SQRT(
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[issue_comment] - XMean, 2)) *
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[class_build_debt] - YMean, 2))
+        )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+
+    ROW("Issue Column", "issue_comment", "Class Column", "class_code_debt", "Correlation",
+        VAR XMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[issue_comment])
+        VAR YMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[class_code_debt])
+        VAR Numerator = SUMX(ALL('IssuesEncoded'),
+            ('IssuesEncoded'[issue_comment] - XMean) *
+            ('IssuesEncoded'[class_code_debt] - YMean)
+        )
+        VAR Denominator = SQRT(
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[issue_comment] - XMean, 2)) *
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[class_code_debt] - YMean, 2))
+        )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+
+    ROW("Issue Column", "issue_comment", "Class Column", "class_defect_debt", "Correlation",
+        VAR XMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[issue_comment])
+        VAR YMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[class_defect_debt])
+        VAR Numerator = SUMX(ALL('IssuesEncoded'),
+            ('IssuesEncoded'[issue_comment] - XMean) *
+            ('IssuesEncoded'[class_defect_debt] - YMean)
+        )
+        VAR Denominator = SQRT(
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[issue_comment] - XMean, 2)) *
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[class_defect_debt] - YMean, 2))
+        )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+
+    ROW("Issue Column", "issue_comment", "Class Column", "class_design_debt", "Correlation",
+        VAR XMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[issue_comment])
+        VAR YMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[class_design_debt])
+        VAR Numerator = SUMX(ALL('IssuesEncoded'),
+            ('IssuesEncoded'[issue_comment] - XMean) *
+            ('IssuesEncoded'[class_design_debt] - YMean)
+        )
+        VAR Denominator = SQRT(
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[issue_comment] - XMean, 2)) *
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[class_design_debt] - YMean, 2))
+        )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+
+    ROW("Issue Column", "issue_comment", "Class Column", "class_documentation_debt", "Correlation",
+        VAR XMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[issue_comment])
+        VAR YMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[class_documentation_debt])
+        VAR Numerator = SUMX(ALL('IssuesEncoded'),
+            ('IssuesEncoded'[issue_comment] - XMean) *
+            ('IssuesEncoded'[class_documentation_debt] - YMean)
+        )
+        VAR Denominator = SQRT(
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[issue_comment] - XMean, 2)) *
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[class_documentation_debt] - YMean, 2))
+        )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+
+    ROW("Issue Column", "issue_comment", "Class Column", "class_requirement_debt", "Correlation",
+        VAR XMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[issue_comment])
+        VAR YMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[class_requirement_debt])
+        VAR Numerator = SUMX(ALL('IssuesEncoded'),
+            ('IssuesEncoded'[issue_comment] - XMean) *
+            ('IssuesEncoded'[class_requirement_debt] - YMean)
+        )
+        VAR Denominator = SQRT(
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[issue_comment] - XMean, 2)) *
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[class_requirement_debt] - YMean, 2))
+        )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    ),
+
+    ROW("Issue Column", "issue_comment", "Class Column", "class_test_debt", "Correlation",
+        VAR XMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[issue_comment])
+        VAR YMean = AVERAGEX(ALL('IssuesEncoded'), 'IssuesEncoded'[class_test_debt])
+        VAR Numerator = SUMX(ALL('IssuesEncoded'),
+            ('IssuesEncoded'[issue_comment] - XMean) *
+            ('IssuesEncoded'[class_test_debt] - YMean)
+        )
+        VAR Denominator = SQRT(
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[issue_comment] - XMean, 2)) *
+            SUMX(ALL('IssuesEncoded'), POWER('IssuesEncoded'[class_test_debt] - YMean, 2))
+        )
+        RETURN DIVIDE(Numerator, Denominator, 0)
+    )
+)

@@ -1,0 +1,11 @@
+EVALUATE
+UNION(
+    ROW("Class Column", "class_architecture_debt", "Variance", VAR.P('IssuesEncoded'[class_architecture_debt])),
+    ROW("Class Column", "class_build_debt", "Variance", VAR.P('IssuesEncoded'[class_build_debt])),
+    ROW("Class Column", "class_code_debt", "Variance", VAR.P('IssuesEncoded'[class_code_debt])),
+    ROW("Class Column", "class_defect_debt", "Variance", VAR.P('IssuesEncoded'[class_defect_debt])),
+    ROW("Class Column", "class_design_debt", "Variance", VAR.P('IssuesEncoded'[class_design_debt])),
+    ROW("Class Column", "class_documentation_debt", "Variance", VAR.P('IssuesEncoded'[class_documentation_debt])),
+    ROW("Class Column", "class_requirement_debt", "Variance", VAR.P('IssuesEncoded'[class_requirement_debt])),
+    ROW("Class Column", "class_test_debt", "Variance", VAR.P('IssuesEncoded'[class_test_debt]))
+)

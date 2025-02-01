@@ -1,0 +1,11 @@
+EVALUATE
+UNION(
+    ROW("Classification Column", "classification_architecture_debt", "Variance", VAR.P('PullRequestEncoded'[classification_architecture_debt])),
+    ROW("Classification Column", "classification_build_debt", "Variance", VAR.P('PullRequestEncoded'[classification_build_debt])),
+    ROW("Classification Column", "classification_code_debt", "Variance", VAR.P('PullRequestEncoded'[classification_code_debt])),
+    ROW("Classification Column", "classification_defect_debt", "Variance", VAR.P('PullRequestEncoded'[classification_defect_debt])),
+    ROW("Classification Column", "classification_design_debt", "Variance", VAR.P('PullRequestEncoded'[classification_design_debt])),
+    ROW("Classification Column", "classification_documentation_debt", "Variance", VAR.P('PullRequestEncoded'[classification_documentation_debt])),
+    ROW("Classification Column", "classification_requirement_debt", "Variance", VAR.P('PullRequestEncoded'[classification_requirement_debt])),
+    ROW("Classification Column", "classification_test_debt", "Variance", VAR.P('PullRequestEncoded'[classification_test_debt]))
+)
